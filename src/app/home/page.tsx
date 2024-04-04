@@ -1,11 +1,16 @@
 import React from 'react'
+import Navbar from '../Components/Navbar';
+import CategoryBroswer from '../Components/CategoryBroswer';
 
 type Props = {}
 
-const Home = (props: Props) => {
+const HomePage = (props: Props) => {
   return (
-    <div>Hoem page</div>
-  )
+    <>
+    <Navbar />
+    <CategoryBroswer />
+    </>
+    )
 }
 
-export default Home;
+export default HomePage;
