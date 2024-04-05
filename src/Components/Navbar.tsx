@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link'
 import React from 'react'
 import { FaMagnifyingGlass, FaUser } from 'react-icons/fa6'
 
@@ -20,7 +21,7 @@ function Navbar({ }: Props) {
 
         <div className='flex space-x-3'>
           <button className=' rounded-md p-1 inline text-green-800 underline text-xl'>Login</button>
-          <button className=' border border-black rounded-md p-1 bg-gradient-to-r from-green-400 to-yellow-300'>Sell Now</button>
+          <Link href={"/post"} className=' border border-black rounded-md p-1 bg-gradient-to-r from-green-400 to-yellow-300'>Sell Now</Link>
         </div>
       </div>
       <div className='w-full flex items-center border border-black p-2 md:hidden rounded-lg'>

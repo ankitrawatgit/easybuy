@@ -5,27 +5,32 @@ import { FaBox, FaCar, FaComputer, FaLeaf, FaMobile, FaX } from 'react-icons/fa6
 type Props = {}
 
 export const category=[
-  {
+  { id:0,
     title:"Car",
     icon:<FaCar size={40}/>
   },
   {
+    id:1,
     title:"Electronic",
     icon:<FaComputer size={40}/>
   },
   {
+    id:2,
     title:"Mobile",
     icon:<FaMobile size={40}/>
   },
   {
+    id:3,
     title:"Humans",
     icon:<FaFemale size={40}/>
   },
   {
+    id:4,
     title:"Ganga Heroin",
     icon:<FaLeaf size={40}/>
   },
   {
+    id:5,
     title:"Other",
     icon:<FaBox size={40}/>
   },
