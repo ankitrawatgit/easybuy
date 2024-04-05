@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Navbar from "./Components/Navbar";
+import Navbar from "../Components/Navbar";
 import HomePage from "./home/page";
 
-export default function Home() {
+export default function App() {
   return (
    <main>
     <HomePage />

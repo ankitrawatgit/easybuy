@@ -51,12 +51,11 @@ function Signup({ }: Props) {
     return (
         <div className="bg-gradient-to-r from-red-400 to-indigo-600 h-screen flex justify-center items-center">
             <div className="w-96 bg-white p-8 rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold mb-4 ml-6">Welcome to EasyBuy</h2>
                 <h2 className="text-2xl font-bold mb-4">Signup</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700">
-                            Email
+                            Email *
                         </label>
                         <input
                             type="email"
@@ -71,7 +70,7 @@ function Signup({ }: Props) {
                     </div>
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-gray-700">
-                            Username
+                            Username *
                         </label>
                         <input
                             type="text"
@@ -86,7 +85,7 @@ function Signup({ }: Props) {
                     </div>
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-gray-700">
-                            Password
+                            Password *
                         </label>
                         <input
                             type="password"
@@ -101,7 +100,7 @@ function Signup({ }: Props) {
                     </div>
                     <div className="mb-4">
                         <label htmlFor="confirmPassword" className="block text-gray-700">
-                            Confirm Password
+                            Confirm Password *
                         </label>
                         <input
                             type="password"

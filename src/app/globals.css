@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+
+    .max-container {
+        @apply mx-auto max-w-[1080px] mt-1;
+      }    
+
+    .padding-container {
+        @apply p-3;
+      }
+}
+
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
