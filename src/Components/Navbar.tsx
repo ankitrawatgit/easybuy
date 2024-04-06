@@ -20,7 +20,7 @@ function Navbar({ }: Props) {
         </div>
 
         <div className='flex space-x-3'>
-          <button className=' rounded-md p-1 inline text-green-800 underline text-xl'>Login</button>
+          <Link href={'/login'} className=' rounded-md p-1 inline text-green-800 underline text-xl'>Login</Link>
           <Link href={"/post"} className=' border border-black rounded-md p-1 bg-gradient-to-r from-green-400 to-yellow-300'>Sell Now</Link>
         </div>
       </div>

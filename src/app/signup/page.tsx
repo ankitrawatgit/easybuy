@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 type Props = {};
@@ -50,7 +51,7 @@ function Signup({ }: Props) {
 
     return (
         <div className="bg-gradient-to-r from-red-400 to-indigo-600 h-screen flex justify-center items-center">
-            <div className="w-96 bg-white p-8 rounded-lg shadow-md">
+            <div className="w-96 bg-white p-8 rounded-lg shadow-md mx-2">
                 <h2 className="text-2xl font-bold mb-4">Signup</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -132,7 +133,7 @@ function Signup({ }: Props) {
                         </div>
 
                     }
-
+                    <div>Alrady have an account? <Link href={'/login'} className=' text-blue-400 underline' >Login</Link></div>
                     <button
                         type="submit"
                         className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300"
@@ -140,6 +141,7 @@ function Signup({ }: Props) {
                         Signup
                     </button>
                 </form>
+
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ const Categoryitem = (props: Props) => {
                     props.icon
                 }
             </div>
-            <span className=''>{props.title}</span>
+            <div className=''>{props.title}</div>
 
         </div>
     )

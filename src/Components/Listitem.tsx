@@ -1,11 +1,17 @@
+"use client"
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {}
 
 const Listitem = (props: Props) => {
+  const router = useRouter();
+
   return (
-    <div className=' border border-slate-800 p-2 rounded-md hover:bg-slate-200 cursor-pointer transition hover:scale-105'>
+    <div className=' border border-slate-800 p-2 rounded-md hover:bg-slate-200 cursor-pointer transition hover:scale-105' onClick={()=>{
+      router.push('/details/223')
+    }}>
       <div className=' mb-3'>
         <Image src={"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818"} height={400} width={400} alt='itemimage' className='w-50 h-70 lg:h-48 rounded-md' />
         {/* <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818" alt="item image" className=' w-52 h-70 ' /> */}

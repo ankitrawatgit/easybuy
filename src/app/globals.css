@@ -5,17 +5,31 @@
 
 @layer utilities {
 
-    .max-container {
-        @apply mx-auto max-w-[1080px] mt-1;
-      }    
+  .max-container {
+    @apply mx-auto max-w-[1080px] mt-1;
+  }
 
-    .padding-container {
-        @apply p-3;
-      }
+  .padding-container {
+    @apply p-3;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade {
+    animation: fadeIn 1s linear;
+  }
+
 }
 
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-
