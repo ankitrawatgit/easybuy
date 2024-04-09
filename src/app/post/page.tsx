@@ -2,17 +2,20 @@
 import { category } from '@/Components/CategoryBroswer'
 import Categoryitem from '@/Components/Categoryitem'
 import PostNavbar from '@/Components/PostNavbar'
+import { usePostContext } from '@/Provider/Posts'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useContext } from 'react'
 
 type Props = {}
 
 const Post = (props: Props) => {
     
     const rounter = useRouter();
+    const postcontext = usePostContext();
 
     const handleonclick =(item:number)=>{
-        rounter.push(`/post/${item}`)
+        postcontext?.setcategoryid(item);
+        rounter.push(`/post/createpost`)
     }
 
     

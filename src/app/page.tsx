@@ -12,6 +12,7 @@ export default function App() {
     <CategoryBroswer />
     <PostList />
     <Footter />
+    
     </div>
   );
 }

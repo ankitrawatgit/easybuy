@@ -44,7 +44,7 @@ function CategoryBroswer({}: Props) {
       <div className='flex overflow-scroll p-5 space-x-16 hide-scrollbar'>
         {
           category.map((e)=>(
-            <div className=''>
+            <div className='' key={e.id}>
               <div className='mb-1'>{e.icon}</div>
               <div className=' text-xs'>{e.title}</div>
             </div>

@@ -1,56 +1,85 @@
 "use client"
 import PostNavbar from '@/Components/PostNavbar'
+import { Post } from '@/Provider/Posts';
+import { useGetAllPosts, useGetByIdPost } from '@/hooks/post';
+import { QueryCache } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import { FaUser } from 'react-icons/fa';
+import { FaMessage } from 'react-icons/fa6';
 import SimpleImageSlider from "react-simple-image-slider";
+import { json } from 'stream/consumers';
 
 
 type Props = {}
 
-const images = [
-  { url: "https://media.wired.com/photos/6332360740fe1e8870aa3bc0/master/pass/iPhone-14-Review-Gear.jpg" },
-  { url: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-model-unselect-gallery-1-202209_FMT_WHH?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1660745142376" },
-  { url: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693086369818" },
-  { url: "https://www.splashlearn.com/math-vocabulary/wp-content/uploads/2022/05/image5-888x1024.jpg" },
-];
 
 
 
 const Details = (props: Props) => {
 
+  const params = useParams();
+  const id = params.postid[0];
+
+  const { post } = useGetByIdPost(parseInt(id))
+  if (!post) {
+    return <div className='flex justify-center items-center h-[100vh]'>Loading ...</div>
+  }
+
+
+
   return (
-    <div>
-      <PostNavbar title='Iphone 13 pro max' />
-      <div className='grid lg:grid-cols-2 gap-5 max-container '>
-        <div className=' relative'>
+    <>
+    <PostNavbar title={post?.title} />
+    <div className=' mx-auto max-w-[700px] mt-1 padding-container'>
+      <div className=' lg:grid-cols-2 gap-5  '>
+        <div className=' relative '>
           <SimpleImageSlider
             width={'100%'}
-            height={'50vh'}
-            images={images}
+            height={'60vh'}
+            images={post.images}
             showBullets={true}
             showNavs={true}
             // autoPlay={true}
             autoPlayDelay={3}
-            style={{ margin: 'auto' }}
+            style={{ margin: 'auto', fill:'1' }}
           />
         </div>
 
         <div className=' border p-5 flex flex-col justify-between'>
           <div>
             <h1 className=' text-black font-bold text-2xl'>Details</h1>
-            <h1 className=' text-3xl'>RS. 14999</h1>
-            <div className=' text-xl '>Iphone 13 pro max in garbase rate</div>
-            <h2 className='mt-2 text-black font-bold'>Discription</h2>
-            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, atque accusamus sed ex unde</div>
+            <h1 className=' text-3xl'>{"₹" + post.price}</h1>
+            <div className=' text-xl '>{post.title}</div>
+            <p className='mt-2 text-black text-sm'>{post.description}</p>
+
             <div className='mt-2 font-bold'>Address</div>
-            <div>India(UK) - Satan gali samsan ka samne</div>
+            <div>{post.Address}</div>
           </div>
           <div className='flex justify-end mt-3'>
-            <div>Created At. 6 April</div>
+            <div>{new Date(post.createdAt).toLocaleString()}</div>
           </div>
         </div>
 
       </div>
+      <div className=''>
+        <h1 className=' text-black font-bold my-2'>Seller Details</h1>
+        <div className=' border flex justify-between items-center p-3'>
+          <div className=' border rounded-full p-1'>{
+            post.author.image ? <Image src={post.author.image} width={400} height={400} className='w-20 h-20 rounded-full' alt='seller image' /> : <FaUser size={40} />
+          }</div>
+
+          <div>{post.author.name}<span>{" @"+post.author.username}</span></div>
+
+          <button className=' bg-green-800 w-32 h-10 rounded-md flex justify-center items-center gap-2'>
+            <FaMessage size={20} color='white'/>
+            <div className=' text-sm text-white'>Chat</div>
+          </button>
+        </div>
+      </div>
     </div>
+    </>
   )
 }
 

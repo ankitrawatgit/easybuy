@@ -1,13 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
-        remotePatterns:[{
+    images: {
+        remotePatterns: [{
             protocol: 'https',
-            hostname: 'store.storeimages.cdn-apple.com',
+            hostname: 'apollo.olx.in',
             port: '',
-            pathname: '/4982/as-images.apple.com/**',
+        },
+        {
+            protocol: 'https',
+            hostname: '**.*.com',
+            port: '',
         }]
-        
+
     }
 };
 
