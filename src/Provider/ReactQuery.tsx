@@ -23,12 +23,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   )
 
   return (
-   
-      <QueryClientProvider client={queryClient}>
-        <PostProvider>
-        <ReactQueryDevtools />
-        {children}
-        </PostProvider>
-      </QueryClientProvider>
+
+    <QueryClientProvider client={queryClient}>
+      <PostProvider>
+          <ReactQueryDevtools />
+          {children}
+      </PostProvider>
+    </QueryClientProvider>
   )
 }

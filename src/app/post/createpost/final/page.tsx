@@ -1,11 +1,12 @@
 "use client"
 import PostNavbar from '@/Components/PostNavbar'
 import { imageuploadeddata, usePostContext } from '@/Provider/Posts'
+import { useGetLogedinUser } from '@/hooks/Auth'
 import { useUploadImage } from '@/hooks/image'
 import { useCreatePost } from '@/hooks/post'
 import { useMutationState, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import React, { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { FaCamera, FaPlus } from 'react-icons/fa'
@@ -24,7 +25,8 @@ const Finalpage = (props: Props) => {
   const [isuploading, setisuploading] = useState(false);
   const postcontext = usePostContext();
   const router = useRouter();
-  const { mutateAsync } = useUploadImage();
+  const uploadmutation = useUploadImage();
+  const { mutateAsync } = uploadmutation;
   const { mutateAsync: createpost } = useCreatePost();
   const checkpostdetailsvalidated = () => {
     if (!postcontext?.postDetails.isvalidated) {
@@ -33,7 +35,6 @@ const Finalpage = (props: Props) => {
       return;
     }
   }
-
 
   useEffect(() => {
     checkpostdetailsvalidated();
@@ -50,13 +51,14 @@ const Finalpage = (props: Props) => {
     try {
       const res = await mutateAsync(formData);
       if (res.status == 200) {
-        //console.log(res.data);
+        console.log(isuploading);
         addimgurltostate(filename, res.data.data.url)
+
       }
     } catch (error) {
       setselectedImage(prev => prev.filter((e) => e.filename != filename));
       console.log("error");
-      return;
+
     } finally {
       setisuploading(false);
     }
@@ -71,6 +73,7 @@ const Finalpage = (props: Props) => {
 
 
   const handleInputChangeFile = (event: React.ChangeEvent<HTMLInputElement> | Event) => {
+    setisuploading(true);
     const files = (event as React.ChangeEvent<HTMLInputElement>).target.files;
     if (files && files.length > 0) {
       const file = files[0];
@@ -83,7 +86,7 @@ const Finalpage = (props: Props) => {
             filename: uniqueFilename,
             localimgurl: reader.result as string
           };
-          setisuploading(true);
+
           setselectedImage(prevImages => {
             return [...prevImages, uploadedImage]
           });
@@ -91,13 +94,15 @@ const Finalpage = (props: Props) => {
         }
       };
       reader.readAsDataURL(file);
+    } else {
+      setisuploading(false);
     }
   };
 
   const handleSelectImage = useCallback(() => {
 
     if (isuploading) {
-      toast("Wait until photo is uploading...", { position: 'top-center' })
+      toast("Wait until photo is uploading...", { id: '2', position: 'top-center' })
       return;
     }
 
@@ -119,7 +124,11 @@ const Finalpage = (props: Props) => {
   };
 
 
+
+
   const finalUpload = async () => {
+    console.log(postcontext?.uploadedimages);
+
     if (postcontext?.uploadedimages.length == 0) {
       toast.error("Please Upload some photos first")
       return;
@@ -133,6 +142,8 @@ const Finalpage = (props: Props) => {
     const categoryid = postcontext.categoryid;
 
     const { title, description, Address, price } = postcontext.postDetails;
+
+
 
     const createpostdata = {
       title, description, Address, price, images, categoryid
@@ -155,6 +166,7 @@ const Finalpage = (props: Props) => {
       router.push('/');
 
     } catch (error) {
+      console.log(error);
 
     }
 
@@ -162,16 +174,17 @@ const Finalpage = (props: Props) => {
   }
 
 
+
   const Showimage = (props: { url: string, index: number }) => {
     return (
-      <div className=' relative p-3 mb-2 border border-black flex justify-center items-center flex-col animate-fade min-h-72 ' key={props.url}>
+      <div className=' relative p-3 mb-2 border border-black flex justify-center items-center flex-col animate-fade min-h-72 '>
         <div className=' absolute top-0 right-0 cursor-pointer' onClick={() => {
           removeImage(props.index)
         }}>
           <FaCircleXmark className='w-5 h-5' color='red' />
         </div>
         <Image src={props.url} height={400} width={400} alt='itemimage' className='w-50 h-70 rounded-md' />
-      </div>
+      </div >
     )
   }
 
@@ -189,7 +202,7 @@ const Finalpage = (props: Props) => {
         <div className='grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4 mb-2'>
           {
             selectedImage.map((e, i) => (
-              <Showimage url={e.localimgurl} index={i} />
+              <Showimage url={e.localimgurl} index={i} key={e.localimgurl} />
             ))
           }
 

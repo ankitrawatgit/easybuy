@@ -11,7 +11,7 @@ export const useCreatePost = () => {
   const mutation = useMutation({
     mutationKey: ['create-post'],
     mutationFn: (payload: createPostData) => {
-      return axios.post('http://localhost:8000/post/createpost', payload);
+      return axios.post('http://localhost:8000/post/createpost', payload, { withCredentials: true });
     },
     onMutate: (payload) => toast.loading("Creating Your Post", { id: "1" }),
     onSuccess: async (payload) => {

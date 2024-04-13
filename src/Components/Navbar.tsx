@@ -1,4 +1,6 @@
 "use client"
+import { useGetLogedinUser } from '@/hooks/Auth'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { FaMagnifyingGlass, FaUser } from 'react-icons/fa6'
@@ -6,10 +8,28 @@ import { FaMagnifyingGlass, FaUser } from 'react-icons/fa6'
 type Props = {}
 
 function Navbar({ }: Props) {
+
+  const { data, error } = useGetLogedinUser();
+
+
+
+  const UserProfile = (props: { image: string | undefined }) => {
+    return (
+      <div className='flex justify-center items-center'>
+        <div className=' border rounded-full p-1'>
+          {
+            props.image ? <Image src={props.image} alt='' width={30} height={30} className='' /> : <FaUser size={30} />
+
+          }
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='padding-container bg-slate-100 sticky top-0'>
       <div className='flex justify-between mb-2 mx-2'>
-        <h1 className=' text-2xl text-black font-bold'>E B</h1>
+        <h1 className=' text-2xl text-black font-bold p-1'>E B</h1>
 
         <div className='lg:w-[800px] xl:w-[1080px] md:w-[500px] items-center hidden md:flex rounded-md'>
 
@@ -20,7 +40,10 @@ function Navbar({ }: Props) {
         </div>
 
         <div className='flex space-x-3'>
-          <Link href={'/login'} className=' rounded-md p-1 inline text-green-800 underline text-xl'>Login</Link>
+          {
+            !data ?
+              <Link href={'/login'} className=' rounded-md p-1 inline text-green-800 underline text-xl'>Login</Link> : <UserProfile image={data.data.user.image} />
+          }
           <Link href={"/post"} className=' border border-black rounded-md p-1 bg-gradient-to-r from-green-400 to-yellow-300'>Sell Now</Link>
         </div>
       </div>

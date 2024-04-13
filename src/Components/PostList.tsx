@@ -13,7 +13,6 @@ const PostList = (props: props) => {
   const { posts, isFetching, isError } = useGetAllPosts();
 
 
-
   return (
     <div className='padding-container max-container'>
       <h1 className='lg:text-2xl text-xl mb-4'>Fresh Recommendation</h1>

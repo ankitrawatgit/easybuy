@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-const loading = (props: Props) => {
+export const Loading = (props: Props) => {
   return (
     <div className="flex items-center justify-center h-screen bg-transparent">
     <div className="relative bg-transparent ">
@@ -14,4 +14,4 @@ const loading = (props: Props) => {
   )
 }
 
-export default loading
+export default Loading
