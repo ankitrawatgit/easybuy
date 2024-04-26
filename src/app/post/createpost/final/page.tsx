@@ -1,7 +1,7 @@
 "use client"
 import PostNavbar from '@/Components/PostNavbar'
 import { imageuploadeddata, usePostContext } from '@/Provider/Posts'
-import { useGetLogedinUser } from '@/hooks/Auth'
+import { useGetLogedinUser } from '@/hooks/User'
 import { useUploadImage } from '@/hooks/image'
 import { useCreatePost } from '@/hooks/post'
 import { useMutationState, useQueryClient } from '@tanstack/react-query'
@@ -28,17 +28,19 @@ const Finalpage = (props: Props) => {
   const uploadmutation = useUploadImage();
   const { mutateAsync } = uploadmutation;
   const { mutateAsync: createpost } = useCreatePost();
-  const checkpostdetailsvalidated = () => {
+
+  const checkpostdetailsvalidated = useCallback(() => {
     if (!postcontext?.postDetails.isvalidated) {
       toast.error("Details Not validated Yet");
       router.back();
       return;
     }
-  }
+  }, [postcontext,router])
+
 
   useEffect(() => {
     checkpostdetailsvalidated();
-  }, [])
+  }, [checkpostdetailsvalidated])
 
 
 
@@ -51,13 +53,13 @@ const Finalpage = (props: Props) => {
     try {
       const res = await mutateAsync(formData);
       if (res.status == 200) {
-        console.log(isuploading);
+        //console.log(isuploading);
         addimgurltostate(filename, res.data.data.url)
 
       }
     } catch (error) {
       setselectedImage(prev => prev.filter((e) => e.filename != filename));
-      console.log("error");
+      //console.log("error");
 
     } finally {
       setisuploading(false);
@@ -66,7 +68,7 @@ const Finalpage = (props: Props) => {
   }
 
   const addimgurltostate = (filename: string, url: string) => {
-    console.log("From addimagetostate", filename, url);
+    //console.log("From addimagetostate", filename, url);
     postcontext?.setuploadedimages((prev) => [...prev, { filename: filename, filedisplayurl: url }])
   }
 
@@ -127,7 +129,7 @@ const Finalpage = (props: Props) => {
 
 
   const finalUpload = async () => {
-    console.log(postcontext?.uploadedimages);
+    //console.log(postcontext?.uploadedimages);
 
     if (postcontext?.uploadedimages.length == 0) {
       toast.error("Please Upload some photos first")
@@ -139,6 +141,11 @@ const Finalpage = (props: Props) => {
     }
     const images = postcontext.uploadedimages.map((e) => e.filedisplayurl)
 
+    if(images.length <2){
+    toast.error("Please upload more than 2 photos"); 
+    return;     
+    }
+
     const categoryid = postcontext.categoryid;
 
     const { title, description, Address, price } = postcontext.postDetails;
@@ -148,11 +155,10 @@ const Finalpage = (props: Props) => {
     const createpostdata = {
       title, description, Address, price, images, categoryid
     }
-    console.log(createpostdata);
+    //console.log(createpostdata);
 
     try {
       const res = await createpost(createpostdata);
-      console.log(res);
 
       postcontext.postDetails.Address = "";
       postcontext.postDetails.title = "";
@@ -165,8 +171,7 @@ const Finalpage = (props: Props) => {
 
       router.push('/');
 
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
 
     }
 
@@ -196,9 +201,8 @@ const Finalpage = (props: Props) => {
       <PostNavbar title='Create your post' />
       <div className='padding-container max-container flex flex-col min-h-[90vh] '>
         <h1 className='text-xl flex justify-center mb-5'>
-          Let's upload some images
+          Let's upload some images.
         </h1>
-
         <div className='grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4 mb-2'>
           {
             selectedImage.map((e, i) => (

@@ -1,13 +1,14 @@
 import React from 'react'
-import { FaFemale } from 'react-icons/fa'
-import { FaBox, FaCar, FaComputer, FaLeaf, FaMobile, FaX } from 'react-icons/fa6'
+import { FaBold, FaBox, FaCar, FaFemale, FaLeaf, FaMobile, FaUser } from 'react-icons/fa'
+import { FaComputer } from 'react-icons/fa6'
+// import {,}  from 'react-icons/fa6'
 
 type Props = {}
 
 export const category=[
   { id:0,
     title:"Car",
-    icon:<FaCar size={40}/>
+    icon:<FaUser size={40} />
   },
   {
     id:1,

@@ -13,7 +13,7 @@ function PostNavbar({title}: Props) {
 
   return (
     <div className='flex bg-slate-100 mb-2 padding-container items-center justify-center sticky top-0 z-20'>
-        <BiLeftArrowAlt className='w-8 h-8 mr-auto'  onClick={()=>{
+        <BiLeftArrowAlt className='w-8 h-8 mr-auto cursor-pointer'  onClick={()=>{
       router.back()
     }}/>
         <h1 className='text-2xl mr-auto'>{title}</h1>

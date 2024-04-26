@@ -12,7 +12,7 @@ const CreatePost = () => {
   const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     const newValue = id === 'price' ? parseFloat(value) : value;
-    // console.log(Postcontext?.postDetails);
+    // //console.log(Postcontext?.postDetails);
     Postcontext?.setpostDetails((prevDetails: any) => ({
       ...prevDetails,
       [id]: newValue
@@ -65,7 +65,7 @@ const CreatePost = () => {
             required
 
             minLength={10}
-            maxLength={100}
+            maxLength={200}
           ></textarea>
         </div>
         <div className="mb-4">

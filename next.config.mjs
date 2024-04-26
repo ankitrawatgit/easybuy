@@ -10,7 +10,13 @@ const nextConfig = {
             protocol: 'https',
             hostname: '**.*.com',
             port: '',
-        }]
+        },
+        {
+            protocol: 'https',
+            hostname: '**.*.co',
+            port: '',
+        }
+    ]
 
     }
 };

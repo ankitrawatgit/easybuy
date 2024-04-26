@@ -1,8 +1,9 @@
 "use client"
-import { useCreateUser, useGetLogedinUser } from '@/hooks/Auth';
+import { useCreateUser, useGetLogedinUser } from '@/hooks/User';
 import { useUploadImage } from '@/hooks/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -32,7 +33,7 @@ function Signup({ }: Props) {
    const {mutateAsync} = useUploadImage();
    const {mutateAsync:createuser} = useCreateUser();
    const [isuploading, setisuploading] = useState(false);
-
+   const router = useRouter();
    
    const handleimgupload = async ( imagefile: File) => {
     const formData = new FormData();
@@ -41,11 +42,11 @@ function Signup({ }: Props) {
     try {
       const res = await mutateAsync(formData);
       if (res.status == 200) {
-        //console.log(res.data)
+        ////console.log(res.data)
         setsignupdetails((prev)=>({...prev,image:res.data.data.url}))
       }
     } catch (error) {
-      console.log("error");
+      //console.log("error");
     } finally {
       setisuploading(false);
     }
@@ -83,12 +84,12 @@ function Signup({ }: Props) {
             return
         }
         seterror('')
-        console.log('Name:', signupdetails.name);
-        console.log('Email:', signupdetails.email);
-        console.log('Username:', signupdetails.username);
-        console.log('Password:', signupdetails.password);
-        console.log('Confirm Password:', confirmPassword);
-        console.log('Profile Image:', signupdetails.image);
+        //console.log('Name:', signupdetails.name);
+        //console.log('Email:', signupdetails.email);
+        //console.log('Username:', signupdetails.username);
+        //console.log('Password:', signupdetails.password);
+        //console.log('Confirm Password:', confirmPassword);
+        //console.log('Profile Image:', signupdetails.image);
         finalsubmit();
     };
 
@@ -99,10 +100,11 @@ function Signup({ }: Props) {
 
         try {
             const res  = await createuser({name,email,username,password,image})
-            console.log(res);
+            //console.log(res);
+            router.push('/')
             
         } catch (error:any) {
-            console.log(error.response.data.errorMessage);    
+            //console.log(error.response.data.errorMessage);    
             if(error.response.data.errorMessage){
                 seterror(error.response.data.errorMessage);    
 

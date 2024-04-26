@@ -1,5 +1,6 @@
 "use client"
-import { useGetLogedinUser, useLoginuser } from '@/hooks/Auth';
+import { useGetLogedinUser, useLoginuser } from '@/hooks/User';
+import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import Router from 'next/navigation';
@@ -49,7 +50,7 @@ function Login() {
       logindetails.username = usernameoremail
     }
 
-    console.log(logindetails);
+    //console.log(logindetails);
 
 
     try {
@@ -60,9 +61,9 @@ function Login() {
 
 
     } catch (error: any) {
-      console.log(error);
+      //console.log(error);
 
-      if (error.response.data.errorMessage) {
+      if (error.response?.data?.errorMessage) {
         setError(error.response.data.errorMessage);
       }
 
@@ -86,7 +87,7 @@ function Login() {
             <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" required minLength={6} />
           </div>
           {error && <p className="text-red-500 mb-4">{error}</p>}
-          <div>Don't have account? <Link href={'/signup'} className=' text-blue-400 underline' >Signup</Link></div>
+          <div>Dont have account? <Link href={'/signup'} className=' text-blue-400 underline' >Signup</Link></div>
           <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">Login</button>
         </form>
       </div>
