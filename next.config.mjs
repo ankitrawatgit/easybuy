@@ -18,6 +18,14 @@ const nextConfig = {
         }
     ]
 
+    },
+    async rewrites(){
+        return [
+            {
+            source:'/api/:path*',
+            destination:'https://easyybuybackend.vercel.app/:path*'     
+            }
+        ]
     }
 };
 

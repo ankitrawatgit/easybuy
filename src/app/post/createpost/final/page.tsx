@@ -1,6 +1,6 @@
 "use client"
 import PostNavbar from '@/Components/PostNavbar'
-import { imageuploadeddata, usePostContext } from '@/Provider/Posts'
+import { imageuploadeddata, usePostContext } from '@/Provider/CreatePostsData'
 import { useGetLogedinUser } from '@/hooks/User'
 import { useUploadImage } from '@/hooks/image'
 import { useCreatePost } from '@/hooks/post'

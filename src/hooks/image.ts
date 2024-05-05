@@ -17,7 +17,7 @@ export const useUploadImage = () => {
       toast.success("Uploading Success", { id: "1" });
     },
     onError: () => {
-      toast.error("Error Aa gaya", { id: '1' })
+      toast.error("Error while uploading", { id: '1' })
     }
   });
 

@@ -7,12 +7,11 @@ import React from 'react'
 
 export default function App() {
   return (
-    <div className=' bg-slate-50'>
+    <div className=' bg-slate-50 select-none'>
     <Navbar />
     <CategoryBroswer />
     <PostList />
     <Footter />
-    
     </div>
   );
 }

@@ -1,20 +1,23 @@
 import React, { MouseEventHandler, ReactNode, RefCallback } from 'react'
+import DynamicIcon from './DynamicFaicon'
 
 type Props = {
     title: string | undefined,
-    icon: ReactNode | undefined,
+    icon: string,
+    iconFamily: string 
     classname: string ,
     onclick:MouseEventHandler<HTMLDivElement>
 }
 
 const Categoryitem = (props: Props) => {
+ 
     return (
         <div className={props.classname} onClick={props.onclick}>
             <div className=' mb-2'>
                 {
-                    props.icon
+                  <DynamicIcon icon={props.icon} iconFamily={props.iconFamily}/>
                 }
-            </div>
+            </div>  
             <div className=''>{props.title}</div>
 
         </div>

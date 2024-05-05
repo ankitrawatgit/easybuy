@@ -10,6 +10,7 @@ import { FaX } from 'react-icons/fa6';
 type Props = {
   userdata: UserProfile,
   setshoweditmodal: Dispatch<SetStateAction<boolean>>;
+  refetch:Function
 }
 
 interface UserProfile {
@@ -42,17 +43,17 @@ const EditProfileModal = (props: Props) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission, e.g., update user profile
     console.log('Updated user profile:', userProfile);
     if(userProfile.image == ""){
-      updateUser({name:userProfile.name,image:undefined})
+     await updateUser({name:userProfile.name,image:undefined})
     }else{
-      updateUser({name:userProfile.name,image:userProfile.image})
+     await updateUser({name:userProfile.name,image:userProfile.image})
     }
 
-
+   await props.refetch()
     closeModal();
   };
 

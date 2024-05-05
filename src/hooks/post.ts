@@ -1,9 +1,11 @@
-import { Post, createPostData } from "@/Provider/Posts";
+import { Post, createPostData } from "@/Provider/CreatePostsData";
 import { QueryCache, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { unstable_noStore } from "next/cache";
 import { headers } from "next/headers";
 import toast from "react-hot-toast";
+
+const localhost = process.env.NEXT_PUBLIC_HOST_API_URL;
 
 
 export const useCreatePost = () => {
@@ -12,8 +14,8 @@ export const useCreatePost = () => {
     mutationKey: ['create-post'],
     mutationFn: (payload: createPostData) => {
       console.log(payload);
-      
-      return axios.post('http://localhost:8000/post/createpost', payload, { withCredentials: true });
+   
+      return axios.post(`${localhost}/post/createpost`, payload, { withCredentials: true });
     },
     onMutate: (payload) => toast.loading("Creating Your Post", { id: "1" }),
     onSuccess: async (payload) => {
@@ -23,7 +25,7 @@ export const useCreatePost = () => {
     onError: (e) => {
       //console.log(e);
 
-      toast.error("Error Aa gaya", { id: '1' })
+      toast.error("Error", { id: '1' })
 
     }
   });
@@ -34,7 +36,7 @@ export const useCreatePost = () => {
 export const useGetUserPosts=(id:number)=>{
   const query = useQuery({
     queryKey: ["user's-posts",id],
-    queryFn: () => axios.post('http://localhost:8000/post/getbyuserid',{id:id}),
+    queryFn: () => axios.post(`${localhost}/post/getbyuserid`,{id:id}),
     refetchOnMount:true
   });
 
@@ -42,10 +44,9 @@ export const useGetUserPosts=(id:number)=>{
 }
 
 export const useGetAllPosts = () => {
-
   const query = useQuery({
     queryKey: ["all-posts"],
-    queryFn: () => axios.get('http://localhost:8000/post/getAll'),
+    queryFn: () => axios.get(`${localhost}/post/getAll`),
   });
 
   return { ...query, posts: query.data?.data.posts };
@@ -74,7 +75,7 @@ export const useDeletePost =()=>{
   const mutation = useMutation({
     mutationKey: ['delete-post'],
     mutationFn: (payload: {id:number | undefined}) => {
-      return axios.post('http://localhost:8000/post/delete', {id:payload.id}, { withCredentials: true });
+      return axios.post(`${localhost}/post/delete`, {id:payload.id}, { withCredentials: true });
     },
     onMutate: (payload) => toast.loading("Deleting Post", { id: "1" }),
     onSuccess: async (payload) => {
@@ -84,11 +85,22 @@ export const useDeletePost =()=>{
     onError: (e) => {
       //console.log(e);
 
-      toast.error("Error Aa gaya", { id: '1' })
+      toast.error("Error", { id: '1' })
 
     }
   });
 
   return mutation;
 }
+
+
+export const useSearchPost=()=>{
+  const mutation = useMutation({
+    mutationKey:["serach-post"],
+    mutationFn:(payload:string)=>axios.post(`${localhost}/post/search`,{searchquery:payload}),
+  })
+
+  return mutation;
+}
+
 

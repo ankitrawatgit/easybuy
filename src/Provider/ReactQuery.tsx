@@ -5,7 +5,7 @@
 import { useState } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { PostProvider } from "./Posts"
+import { PostProvider } from "./CreatePostsData"
 
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -16,7 +16,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           queries: {
             // With SSR, we usually want to set some default staleTime
             // above 0 to avoid refetching immediately on the client
-            staleTime: 60 * 1000,
+            staleTime: 60 * 10000,
           },
         },
       })

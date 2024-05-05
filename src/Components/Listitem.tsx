@@ -33,7 +33,7 @@ const Listitem = (props: Props) => {
     }}><FaTrash size={20}/></div>
   }
   <div className="max-h-72 lg:ma mb-3">
-    <Image src={props.images[0]} height={400} width={400} alt="itemimage" className="w-50 h-60 lg:h-70 rounded-md" />
+    <Image src={props.images[0]} height={400} width={400} alt="itemimage" className="w-50 h-52 lg:h-70 rounded-md" />
   </div>
   
   <div className="flex flex-col justify-between flex-grow">
@@ -48,7 +48,7 @@ const Listitem = (props: Props) => {
     <div className="mt-auto"> 
       <div className="flex justify-between">
         <div className=' text-xs'>{props.address}</div>
-        <div className='text-xs'>{new Date(props.createdAt).toDateString()}</div>
+        <div className='text-[0.60rem]'>{new Date(props.createdAt).toDateString()}</div>
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 "use client"
 import PostNavbar from '@/Components/PostNavbar'
-import { Post } from '@/Provider/Posts';
+import { Post } from '@/Provider/CreatePostsData';
+import { useGetLogedinUser, useLoginuser } from '@/hooks/User';
 import { useGetAllPosts, useGetByIdPost } from '@/hooks/post';
 import CustomCarousel from '@/slider/custom.slider';
 import { QueryCache } from '@tanstack/react-query';
@@ -20,7 +21,8 @@ const Details = (props: Props) => {
   const router = useRouter()
   const params:any = useParams();
   const id  = parseInt(params.postid)
-  
+  const { data: loginuserdata, isError: getloginusererror, isFetching, isSuccess } = useGetLogedinUser();
+  const logedinuserdetails = loginuserdata?.data.user;
 
   const { post,isLoading} = useGetByIdPost(id)
   if (isLoading) {
@@ -33,7 +35,7 @@ const Details = (props: Props) => {
 
   return (
     <>
-    <PostNavbar title={post?.title} />
+    <PostNavbar title={post?.title.slice(0,25)+" ..."} />
     <div className='mx-auto max-w-[900px] mt-1 padding-container'>
       <div className='lg:flex-row flex lg:items-stretch flex-col items-center'>
         <div className='relative'>
@@ -82,14 +84,15 @@ const Details = (props: Props) => {
           <div className=' cursor-pointer' onClick={()=>{
           router.push(`/profile/${post.author.id}`)
         }}> 
-          <div>{post.author.name}<span>{" @"+post.author.username}</span></div>
-
+          <div className='text-xl md:text-lg'>{post.author.name}<span className=' text-blue-400'>{" @"+post.author.username}</span></div>
           </div>
-
-          <button className=' bg-green-800 w-32 h-10 rounded-md flex justify-center items-center gap-2'>
+          {
+        logedinuserdetails?.id != post.author.id &&  <button className=' bg-green-800 w-32 h-10 rounded-md flex justify-center items-center gap-2' onClick={()=>{router.push(`/chat/${post.author.id}`)}}>
             <FaMessage size={20} color='white'/>
             <div className=' text-sm text-white'>Chat</div>
           </button>
+
+          }
         </div>
       </div>
     </div>

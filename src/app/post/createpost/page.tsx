@@ -1,7 +1,7 @@
 "use client"
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { redirect, useRouter } from 'next/navigation';
-import { usePostContext } from '@/Provider/Posts';
+import { usePostContext } from '@/Provider/CreatePostsData';
 import PostNavbar from '@/Components/PostNavbar';
 import toast from 'react-hot-toast';
 
@@ -25,8 +25,8 @@ const CreatePost = () => {
       toast.error("Price shouldbe greater than 0")
       return;
     }
-    if (!Postcontext?.postDetails.description || Postcontext?.postDetails.description.length < 20 || Postcontext?.postDetails.description.length > 100) {
-      seterror(`Description must be at least 20 and max 100 characters long.(currently have ${Postcontext?.postDetails.description.length} characters)`);
+    if (!Postcontext?.postDetails.description || Postcontext?.postDetails.description.length < 20 || Postcontext?.postDetails.description.length > 200) {
+      seterror(`Description must be at least 20 and max 200 characters long.(currently have ${Postcontext?.postDetails.description.length} characters)`);
       return;
     }
     Postcontext.postDetails.isvalidated = true;
@@ -93,7 +93,7 @@ const CreatePost = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="category" className="block mb-2 font-bold">Selected Category *</label>
+          {/* <label htmlFor="category" className="block mb-2 font-bold">Selected Category *</label> */}
           {/* <div className="flex space-x-3 items-center justify-center">
           <Categoryitem title={category.at(Postcontext?.categoryid)?.title} icon={category.at(Postcontext?.categoryid)?.icon} onclick={()=>{}} classname=''/>
             <div className=' underline text-blue-400 cursor-pointer' onClick={()=>{
