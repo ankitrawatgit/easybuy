@@ -38,8 +38,6 @@ interface Category {
 
 
 interface PostContextValue {
-  posts: Post[];
-  setPosts: Dispatch<SetStateAction<Post[]>>;
   postDetails: postdetailsformdata;
   setpostDetails: Dispatch<SetStateAction<postdetailsformdata>>;
   categoryid: number,
@@ -88,7 +86,7 @@ export const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
   const [uploadedimages, setuploadedimages] = useState<imageuploadeddata[]>([])
 
   return (
-    <PostsContext.Provider value={{ posts, setPosts, postDetails, setpostDetails, categoryid, setcategoryid, uploadedimages, setuploadedimages }}>
+    <PostsContext.Provider value={{ postDetails, setpostDetails, categoryid, setcategoryid, uploadedimages, setuploadedimages }}>
       {children}
     </PostsContext.Provider>
   );

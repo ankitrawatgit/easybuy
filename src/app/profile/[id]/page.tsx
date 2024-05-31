@@ -50,7 +50,7 @@ const Page = (props: Props) => {
   }
 
   const handlechatclick=()=>{
-    if(userdetails.id == logedinuserdetails.id ){
+    if(userdetails.id == logedinuserdetails?.id ){
       return;
     }
 

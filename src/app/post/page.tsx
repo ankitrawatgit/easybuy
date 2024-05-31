@@ -25,7 +25,7 @@ const Post = (props: Props) => {
     
     return (
         <div className=''>
-            <PostNavbar title='Create your post' />
+            <PostNavbar title='Create Your post' />
             <h1 className='flex justify-center text-xl font-bold'>CHOOSE YOUR CATEGORY</h1>
               <div className='padding-container m-auto max-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
                 {

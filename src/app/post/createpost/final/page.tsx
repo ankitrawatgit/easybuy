@@ -198,7 +198,7 @@ const Finalpage = (props: Props) => {
 
   return (
     <div>
-      <PostNavbar title='Create your post' />
+      <PostNavbar title='Create Your post' />
       <div className='padding-container max-container flex flex-col min-h-[90vh] '>
         <h1 className='text-xl flex justify-center mb-5'>
           Let's upload some images.

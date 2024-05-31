@@ -18,7 +18,6 @@ const Navbar = ({ }: Props) => {
   const [searchvalue, setsearchvalue] = useState("");
   const { data, error,refetch } = useGetLogedinUser();
   const router = useRouter();
-  // console.log(data);
   
   const onProfileclick = () => {
     router.push(`profile/${data?.data.user.id}`)
@@ -38,11 +37,6 @@ const Navbar = ({ }: Props) => {
     }
 
   }
-
-  // useEffect(() => {
-  //   refetch()
-  // }, [])
-  
 
 
   const UserProfileAndChat = (props: { image: string | undefined }) => {

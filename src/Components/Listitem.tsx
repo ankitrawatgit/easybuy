@@ -39,10 +39,10 @@ const Listitem = (props: Props) => {
   <div className="flex flex-col justify-between flex-grow">
     <div>
       <h1 className="text-xl font-bold text-black">
-        {props.title.slice(0, 15) + "..."}
+      {"₹ "+props.price.toLocaleString()}
       </h1>
       <h1 className="text-xs mb-2 text-gray-600">
-        {props.description.slice(0, 26) + "..."}
+        {props.title.slice(0, 26) + "..."}
       </h1>
     </div>
     <div className="mt-auto"> 
